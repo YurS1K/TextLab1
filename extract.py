@@ -10,6 +10,7 @@ IN = "corpuses/learning_corpus.csv"
 OUT = Path("features")
 OUT.mkdir(exist_ok=True)
 
+LIMIT = None
 nlp = stanza.Pipeline(
     lang="ru",
     processors="tokenize,pos,lemma,depparse",
@@ -20,7 +21,8 @@ nlp = stanza.Pipeline(
 
 # Загрузка
 df = pd.read_csv(IN).fillna("")
-df = df.head().copy()
+if LIMIT:
+    df = df.head(LIMIT).copy()
 print(f"Текстов: {len(df)}")
 if "genre" in df.columns:
     print("Жанры:", df["genre"].value_counts().to_dict())
