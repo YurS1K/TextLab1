@@ -242,14 +242,6 @@ feat_df = pd.DataFrame(rows)
 feat_df.to_csv(OUT / "corpus_numeric_features.csv",
                index=False, encoding="utf-8-sig")
 print(f"Числовые признаки: {feat_df.shape}")
-
-
-# Сводка
-
-combined = pd.concat([feat_df.drop(columns=["title"])], axis=1)
-combined.to_csv(OUT / "corpus_features_full.csv",
-                index=False, encoding="utf-8-sig")
-print(f"\nИтоговая таблица: {combined.shape}")
 print("Файлы в:", OUT.resolve())
 for p in sorted(OUT.iterdir()):
     print("  ", p.name)
